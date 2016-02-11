@@ -1,14 +1,14 @@
-var currentVersion=2;
+var currentVersion=5;
 
 self.addEventListener('install', function(event) {
-  console.log('hello world! INSTALL');
+  console.log('hello world! sw.js in installing.');
   event.waitUntil(Promise.resolve);
 });
 
 
 self.addEventListener('activate', function(event) {
   clients.claim();
-  console.log('hello world! Activate');
+  console.log('sw.js is ctivating');
 
 });
 
