@@ -66,23 +66,9 @@ Sync
 - shutoff server
 - reload page, everything loads fine
 
-## Demo 2 - prefetching
-- set up sw to prefetch assets for page2
-- watch sw fetch assets for page2 in bg on page1
-- navigate to page2 and assets are already loaded!
-
-## Demo 3 - api call interception
-- set up sw to intercept network requests
-- user initiates nw req
--- sw console logs intercept
--- sw initiates nw req and caches result
--- sw returns now-cached result
-- shut off server
-- user initiates nw req
--- sw intercepts and console logs it
--- nw req fails so sw responds with cached req
-- user reloads page and initiates nw req
--- ever just works(tm)
+## Demo 2 - fetch intercepting and cacheing
+- intercept a call to a new asset
+- cache it
 
 # Automated Builds
 - Broccoli (ember) https://github.com/markdalgleish/serviceworker-loader
