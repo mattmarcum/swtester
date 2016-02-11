@@ -8,7 +8,7 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('activate', function(event) {
   clients.claim();
-  console.log('sw.js is ctivating');
+  console.log('sw.js is activating');
 
 });
 
