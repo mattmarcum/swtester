@@ -52,7 +52,7 @@ self.addEventListener('fetch', function(event) {
 
       fetch(event.request).then(function(response) {
 
-        cache.put(event.request, response);
+        cache.put(event.request.clone(), response);
 
       }).catch(function(err) {
 
@@ -72,7 +72,7 @@ self.addEventListener('fetch', function(event) {
       console.log('saving new file:', reqUrl);
 
       caches.open('swtester-v-'+currentVersion).then(function(cache) {
-        cache.put(event.request, response);
+        cache.put(event.request.clone(), response);
       });
 
       return response.clone();
