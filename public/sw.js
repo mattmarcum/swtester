@@ -32,33 +32,53 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  console.log('got fetch req for:'+event.request.url);
+  var reqUrl = event.request.url;
   var response;
+
+  console.log('got fetch req for:'+reqUrl);
+
   event.respondWith(caches.match(event.request)
-  .then(function(response){
+  .then(function(response) {
+
     if(!response) throw new Error('not found');
-    console.log('got cache hit for req for:' + event.request.url);
+
+    console.log('got cache hit for req for:' + reqUrl);
+
+    //update cache
     caches.open('swtester-v-' + currentVersion)
     .then(function(cache) {
-      console.log('updating file:', event.request.url);
+
+      console.log('updating file:', reqUrl);
+
       fetch(event.request).then(function(response) {
+
         cache.put(event.request, response);
+
+      }).catch(function(err) {
+
+        console.log('eror fetching:', reqUrl, err)
+
       });
     });
+
+    //return cached version immediately
     return response.clone();
 
   })
   .catch(function() {
     return fetch(event.request.clone())
     .then(function(response) {
-      console.log('saving new file:', event.request.url);
+
+      console.log('saving new file:', reqUrl);
+
       caches.open('swtester-v-'+currentVersion).then(function(cache) {
         cache.put(event.request, response);
       });
-      return r.clone();
+
+      return response.clone();
     })
-    .catch(function() {
-      return caches.match('/sw.gif');
+    .catch(function(err) {
+      console.log('eror fetching:', reqUrl, err)
     });
   }));
 });
