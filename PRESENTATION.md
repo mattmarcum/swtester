@@ -54,6 +54,12 @@ Sync
 ## Note SW is a work-in-progress - *Expect Bugs*
 - https://code.google.com/p/chromium/issues/detail?id=541797
 
+## Demo 0 - installing service worker
+- git checkout demo0
+- register the worker
+- `navigator.serviceWorker.controller.postMessage('test');`
+- self === scope, no `window` the `self` scope is used instead
+- chrome dev tools switches context
 
 ## Demo 1 - asset caching
 - setup sw to cache assets
